@@ -1,4 +1,4 @@
-package com.softvan.exception;
+package com.softvan.securityexception;
 
 import com.softvan.dto.response.ErrorResponse;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -22,10 +22,10 @@ public class GlobalExceptionHandler {
     public static final String P_LEASE_PROVIDE_VALID_CREDENTIALS = "PLease provide valid credentials";
     public static final String TOKEN_IS_EXPIRED = "Token is expired";
 
-    @ExceptionHandler(CustomLoginException.class)
-    public ErrorResponse CustomLoginException(CustomLoginException ex){
-        logException(ex);
-        return new ErrorResponse(ex.getMessage() , HttpStatus.BAD_REQUEST.value());
+    @ExceptionHandler(CustomException.class)
+    public ErrorResponse CustomLoginException(CustomException ex){
+
+        return new ErrorResponse(ex.getMessage() , HttpStatus.NOT_FOUND.value());
 
     }
 

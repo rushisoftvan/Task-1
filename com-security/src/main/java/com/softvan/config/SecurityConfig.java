@@ -8,6 +8,7 @@ import com.softvan.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,7 +31,8 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
 
     public static String[] PUBLIC_URLS = {
-            "/login"
+            "/login",
+            "/register"
     };
 
     @Bean
@@ -67,6 +69,5 @@ public class SecurityConfig {
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
 
 }

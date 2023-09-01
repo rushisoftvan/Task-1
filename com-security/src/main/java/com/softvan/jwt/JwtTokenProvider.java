@@ -32,11 +32,6 @@ public class JwtTokenProvider {
     private static final String USER_ID = "userId";
 
     private static final String SYSTEM_ROLE = "role";
-
-   // private final String apiKey = "e3LHqZMEtP7pc8HTJeU7cnslny6OQhNgaHa3Jdbjd0jK4AJUBz3xoRLS6AtuWgv4g0pu2L7OIpZvMOtGhGIZLSQ0P0oiQcY1OrvM";
-
-
-
     public String resolveToken(HttpServletRequest request) {//throws AuthenticationException
         String bearerToken = request.getHeader(AUTHORIZATION);
 
@@ -67,20 +62,12 @@ public class JwtTokenProvider {
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(jwtProperties.getJwtSecretKey()).parseClaimsJws(token).getBody().getSubject();
     }
-
-//    public List<String> getPermissions(String token) {
-//        return (List<String>) Jwts.parser().setSigningKey(apiKey).parseClaimsJws(token).getBody().get("permissions");
-//    }
-
-
     public Integer getUserIdToken(String token) {
         return (Integer) Jwts.parser().setSigningKey(jwtProperties.getJwtSecretKey()).parseClaimsJws(token).getBody().get(USER_ID);
     }
-
     public String getSystemRole(String token) {
         return (String) Jwts.parser().setSigningKey(jwtProperties.getJwtSecretKey()).parseClaimsJws(token).getBody().get(SYSTEM_ROLE);
     }
-
 
     // create token for login user
     public String createToken(String username, Integer userId, String role) {

@@ -2,6 +2,7 @@ package com.softvan.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@Table(name="SOFTVAN_USER")
 public class UserEntity {
 
     @Id
@@ -17,13 +19,19 @@ public class UserEntity {
     private Integer id;
 
     @Column(name = "FIRST_NAME")
-    private String firstname;
+    private String firstName;
 
     @Column(name = "LAST_NAME")
-    private String lastname;
+    private String lastName;
 
-
+    @Column(name="EMAIL")
     private String email;
+
+    @Column(name="LOGIN_LOCK_STATUS")
+    private boolean loginLockStatus;
+
+    @Column(name="LOGIN_COUNT")
+    private long logincount=0;
 
     @Column(name = "PASSWORD")
     private String password;

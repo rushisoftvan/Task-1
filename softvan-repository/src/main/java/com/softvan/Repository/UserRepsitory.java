@@ -9,6 +9,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface UserRepsitory extends JpaRepository<UserEntity,Integer> {
+
+
+    Optional<UserEntity> findByEmailIgnoreCase(String username);
+
     @Query("SELECT ue FROM UserEntity ue join fetch ue.role WHERE ue.email = :email")
     Optional<UserEntity> getUserByUsername(@Param("email") String username);
 }

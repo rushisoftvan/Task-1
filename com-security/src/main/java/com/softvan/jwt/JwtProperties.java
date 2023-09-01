@@ -10,6 +10,9 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 @Getter
 @Slf4j
@@ -19,10 +22,12 @@ import javax.annotation.PostConstruct;
 public class JwtProperties {
 
 
-
+    public static final String DEFAULT_PERMIT_ALL_PATH = "/login";
     private long jwtExpireTimeInMinute= 5;
 
     private  String jwtSecretKey;
+
+    private List<String> permitAllPaths=asList(DEFAULT_PERMIT_ALL_PATH);
 
 
     @PostConstruct

@@ -1,4 +1,4 @@
-package com.softvan.exception;
+package com.softvan.securityexception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.softvan.exception;
+package com.softvan.securityexception;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
