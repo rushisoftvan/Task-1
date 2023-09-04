@@ -11,10 +11,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
-@EnableJpaRepositories(basePackageClasses = {com.softvan.Repository.RoleRepository.class} )
+@SpringBootApplication//@EnableJpaRepositories(basePackageClasses = {com.softvan.Repository.RoleRepository.class} )
 @ComponentScan({"com.softvan.*"})
-@EntityScan("com.softvan.*")
+//@EntityScan("com.softvan.*")
 @Slf4j
 @RequiredArgsConstructor
 public class SoftvanAdminApplication implements CommandLineRunner {

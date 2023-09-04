@@ -2,14 +2,12 @@ package com.softvan.service;
 
 import com.softvan.Repository.RoleRepository;
 import com.softvan.Repository.UserRepsitory;
-import com.softvan.dto.request.UserLoginRequest;
 
 
 import com.softvan.dto.request.UserRegisterRequest;
 import com.softvan.entity.RoleEntity;
 import com.softvan.entity.UserEntity;
-import com.softvan.exception.UserAlreadyExitException;
-import com.softvan.exception.UserNotFoundException;
+import com.softvan.exception.UserAlreadyExistsException;
 import com.softvan.jwt.JwtTokenProvider;
 import com.softvan.softrepoexception.RoleNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -35,22 +33,22 @@ public class UserService
 
 
 
-  public String loginUser(UserLoginRequest userLoginRequest)  {
+//  public String loginUser(UserLoginRequest userLoginRequest)  {
+//
+//      UserEntity user = this.userRepsitory.getUserByUsername(userLoginRequest.getEmail()).orElseThrow(() -> new UserNotFoundException("User Not Found For This Username"));
+//      String role = user.getRole().getName();
+//      if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
+//          throw new UserNotFoundException(PASSWORD_IS_NOT_CORRECT);
+//      }
+//          return  this.jwtTokenProvider.createToken(user.getEmail(),user.getId(),role);
+// }
 
-      UserEntity user = this.userRepsitory.getUserByUsername(userLoginRequest.getEmail()).orElseThrow(() -> new UserNotFoundException("User Not Found For This Username"));
-      String role = user.getRole().getName();
-      if (!passwordEncoder.matches(userLoginRequest.getPassword(), user.getPassword())) {
-          throw new UserNotFoundException(PASSWORD_IS_NOT_CORRECT);
-      }
-          return  this.jwtTokenProvider.createToken(user.getEmail(),user.getId(),role);
- }
-
- public Integer registerUser(UserRegisterRequest userRegisterRequest){
+ public String registerUser(UserRegisterRequest userRegisterRequest){
      RoleEntity roleEntity = this.roleRepository.findById(userRegisterRequest.getRoleId()).orElseThrow(() -> new RoleNotFoundException("Role is not available for this id"));
 
      Optional<UserEntity> userByUsername = this.userRepsitory.getUserByUsername(userRegisterRequest.getEmail());
       if(userByUsername.isPresent()){
-          throw new UserAlreadyExitException("User already  exists");
+          throw new UserAlreadyExistsException("User already  exists");
       }
      UserEntity user = new UserEntity();
       user.setEmail(userRegisterRequest.getEmail());
@@ -59,8 +57,8 @@ public class UserService
       user.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
       user.setRole(roleEntity);
      UserEntity savedUser = this.userRepsitory.save(user);
-     return savedUser.getId();
- 
+     return savedUser.getEmail();
+
 
  }
  
