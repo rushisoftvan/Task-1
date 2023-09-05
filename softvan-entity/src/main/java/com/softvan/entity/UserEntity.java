@@ -38,7 +38,7 @@ public class UserEntity {
     private int failedAttempt;
 
     @Column(name="LOGIN_COUNT")
-    private Long loginCount;
+    private long loginCount;
 
     @Column(name="FAILED_ATTEMPT_WINDOW_TIME")
     private LocalDateTime failedAttemptWindowTime;
