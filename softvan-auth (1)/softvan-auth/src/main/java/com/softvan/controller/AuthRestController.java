@@ -2,7 +2,8 @@ package com.softvan.controller;
 
 import com.softvan.dto.request.LoginRequestDto;
 import com.softvan.dto.response.ApiResponse;
-import com.softvan.service.LoginService;
+import com.softvan.service.AuthService;
+import com.softvan.service.DefaultAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,22 +18,17 @@ import javax.validation.Valid;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@Validated
-public class LoginController {
+public class AuthRestController {
 
-    private final LoginService loginService;
+    private final AuthService authService;
 
     @PostMapping("/login")
     public ApiResponse loginUser(@Valid @RequestBody LoginRequestDto loginRequestDto) {
-        String jwtToken = this.loginService.createJwtToken(loginRequestDto);
-        return new ApiResponse(jwtToken, HttpStatus.OK.value());
+        String jwtToken = this.authService.authenticate(loginRequestDto);
+            return new ApiResponse(jwtToken, HttpStatus.OK.value());
     }
-
-    
     @GetMapping("/m1")
     public String m1(){
         return "rushikesh";
     }
-
-
 }

@@ -9,8 +9,8 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 public class LoginRequestDto {
 
-    @NotEmpty(message = "username should not be empty")
-    private String username;
+    @NotEmpty(message = "email should not be empty")
+    private String email;
 
     @NotEmpty(message = "password should not be empty")
     private String password;

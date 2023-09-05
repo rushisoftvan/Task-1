@@ -3,7 +3,6 @@ package com.softvan.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,17 +28,21 @@ public class UserEntity {
     @Column(name="EMAIL")
     private String email;
 
-    @Column(name="LOGIN_LOCK_STATUS")
-    private boolean loginLockStatus;
+    @Column(name="IS_LOCKED")
+    private boolean isLocked;
 
     @Column(name="LOCK_TIME")
     private LocalDateTime lockTime;
 
     @Column(name="FAILED_ATTEMPT")
-    private Integer failedAttempt=0;
+    private int failedAttempt;
 
     @Column(name="LOGIN_COUNT")
-    private long logincount=0;
+    private Long loginCount;
+
+    @Column(name="FAILED_ATTEMPT_WINDOW_TIME")
+    private LocalDateTime failedAttemptWindowTime;
+
 
     @Column(name = "PASSWORD")
     private String password;

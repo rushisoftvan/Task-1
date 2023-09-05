@@ -17,18 +17,19 @@ import java.util.List;
 @Slf4j
 public class SoftvanAuthGlobelExceptionHandler {
     private static final String EXCEPTION_MESSAGE = "Exception occured : ";
+
+
     @ResponseStatus(code=HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(UserNotFoundException.class)
-    public ApiResponse handleProductNotFoundException(UserNotFoundException ex) {
-        String error = ex.getMessage();
-        log.error(EXCEPTION_MESSAGE , ex);
-        return new ApiResponse(Arrays.asList(error), HttpStatus.NOT_FOUND.value());
+    @ExceptionHandler(AccountLockedException.class)
+    public ApiResponse handleUserLokedException(AccountLockedException accountLockedException){
+        String message = accountLockedException.getMessage();
+        return new ApiResponse(Arrays.asList(message),HttpStatus.UNAUTHORIZED.value());
     }
 
     @ResponseStatus(code=HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(UserLokedException.class)
-    public ApiResponse handleUserLokedException(UserLokedException userLokedException){
-        String message = userLokedException.getMessage();
+    @ExceptionHandler(InvalidCredentialException.class)
+    public ApiResponse handleInvalidCredentialException(InvalidCredentialException ex){
+        String message = ex.getMessage();
         return new ApiResponse(Arrays.asList(message),HttpStatus.UNAUTHORIZED.value());
     }
 
