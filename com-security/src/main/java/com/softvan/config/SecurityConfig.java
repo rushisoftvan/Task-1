@@ -32,7 +32,9 @@ public class SecurityConfig {
 
     public static String[] PUBLIC_URLS = {
             "/login",
-            "/register"
+            "/register",
+            "/pationts/**"
+
     };
 
     @Bean

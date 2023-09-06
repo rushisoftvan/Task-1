@@ -27,6 +27,7 @@ public class ComSecurityApplication  implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		  log.info("jwtdate : {}",jwtProperties.getJwtExpireTimeInMinute());
 		  log.info("jwtkey : {} ",jwtProperties.getJwtSecretKey());
+		  log.info("jwtpublicpath : {}" ,jwtProperties.getPermitAllPaths());
 		  log.info("password : {} ",passwordEncoder.encode("123"));
 	}
 }
