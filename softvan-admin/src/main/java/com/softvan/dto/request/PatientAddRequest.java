@@ -1,5 +1,6 @@
 package com.softvan.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,13 +25,13 @@ public class PatientAddRequest {
     @Email(regexp = ".+[@].+[\\.].+")
     private String email;
 
-
+    @NotNull(message="hasAllergy should not be null")
     private Boolean hasAllergy;
 
-
+    @NotNull(message="hasBloodPressure should not be null")
     private Boolean hasBloodPressure;
 
-
+    @NotNull(message= "Date Of Birth Should not be null")
     private LocalDate dateOfBirth;
 
 }

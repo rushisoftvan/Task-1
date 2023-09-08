@@ -31,16 +31,7 @@ public class PatientMapper {
         return patientEntity;
     }
 
-    public PatientAddRequest toDto(PatientEntity patientEntity){
-        log.info("<<<<<<<<< toDto() ");
-        PatientAddRequest patientAddRequest = new PatientAddRequest();
-        patientAddRequest.setFirstName(patientAddRequest.getFirstName());
-        patientAddRequest.setLastName(patientEntity.getLastName());
-        patientAddRequest.setEmail(patientEntity.getEmail());
-        patientAddRequest.setDateOfBirth(patientAddRequest.getDateOfBirth());
-        log.info("toDto() >>>>>>>>");
-        return patientAddRequest;
-    }
+
 
      public PatientResponse toResponseDto(PatientEntity patientEntity){
          log.info("<<<<<<<<< toResponseDto() ");
@@ -52,6 +43,11 @@ public class PatientMapper {
          patientResponse.setUpdatedOn(patientEntity.getUpdatedDateTime());
          patientResponse.setDateOfBirth(patientEntity.getDateOfBirth());
          patientResponse.setStatusEnum(patientEntity.getStatus());
+         PatientInfoEntity patientInfoEntity = patientEntity.getPatientInfoEntity();
+         patientResponse.setHasBloodPressure(patientInfoEntity.getHasBloodPressure());
+         patientResponse.setHasAllergy(patientInfoEntity.getHasAllergy());
+         // patientResponse.setHasAllergy(patientEntity.getPatientInfoEntity().getHasAllergy());
+        // patientResponse.setHasBloodPressure(patientEntity.getPatientInfoEntity().getHasBloodPressure());
          log.info("toResponseDto() >>>>>>>>");
          return  patientResponse;
      }

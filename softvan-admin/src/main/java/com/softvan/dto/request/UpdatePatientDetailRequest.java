@@ -1,5 +1,6 @@
 package com.softvan.dto.request;
 
+import com.softvan.customannotation.StatusEnumTypeConstraint;
 import com.softvan.enums.StatusEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,15 +15,25 @@ import java.time.LocalDate;
 public class UpdatePatientDetailRequest {
     @NotEmpty(message = "First Name Must Not Be Empty")
     private String firstName;
-    @NotEmpty(message = "First Name Must Not Be Empty")
+
+    @NotEmpty(message = "Last Name Must Not Be Empty")
     private String lastName;
-    @NotEmpty(message = "First Name Must Not Be Empty")
+
 
     @Email(regexp = ".+[@].+[\\.].+")
     private String email;
 
+    @NotNull(message="Date Of Birth should not be null")
     private LocalDate dateOfBirth;
 
-    @NotNull(message = "status should not be null")
-    private StatusEnum staus;
+    //@NotNull(message = "Status should not be null")
+    @StatusEnumTypeConstraint
+    private StatusEnum status;
+
+    @NotNull (message="hasAllergy should not be null")
+        private Boolean hasAllergy;
+
+    @NotNull(message="hasBloodPressure should not be null")
+    private Boolean hasBloodPressure;
+
 }

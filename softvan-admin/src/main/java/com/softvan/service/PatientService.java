@@ -1,6 +1,7 @@
 package com.softvan.service;
 
 import com.softvan.Mapper.PatientMapper;
+import com.softvan.dto.PatientDto;
 import com.softvan.dto.request.PatientAddRequest;
 import com.softvan.dto.request.UpdatePatientDetailRequest;
 import com.softvan.dto.response.PatientResponse;
@@ -20,6 +21,7 @@ import java.util.List;
 @Slf4j
 public class PatientService {
 
+    public static final String PATIENT_HAS_BEEN_DELETED = "Patient has been deleted";
     private final PatientMapper patientMapper;
 
     private final PatientRepository patientRepository;
@@ -44,35 +46,44 @@ public class PatientService {
 
 
     public String deletePatientById(Integer id){
+        log.info("<<<<<<<<< deletePatientById()");
         PatientEntity patientEntity = getPatientEntity(id);
         patientEntity.setStatus(StatusEnum.IN_ACTIVE);
         PatientEntity deletedPatient = this.patientRepository.save(patientEntity);
-        return "Patient has been deleted";
+        log.info("deletePatientById() >>>>>>>");
+        return PATIENT_HAS_BEEN_DELETED;
 
     }
 
-    public PatientResponse updatePatientDetails(Integer id, UpdatePatientDetailRequest updatePatientDetailRequest){
+    public PatientResponse updatePatient(Integer id, UpdatePatientDetailRequest updatePatientDetailRequest){
+        log.info("<<<<<<<<< updatePatient()");
         if(updatePatientDetailRequest ==null){
             throw new  CustomException("update Request should not be null");
         }
         PatientEntity patientEntity = getPatientEntity(id);
+
+        patientEntity.getPatientInfoEntity().setHasAllergy(updatePatientDetailRequest.getHasAllergy());
+        patientEntity.getPatientInfoEntity().setHasBloodPressure(updatePatientDetailRequest.getHasBloodPressure());
         patientEntity.setFirstName(updatePatientDetailRequest.getFirstName());
         patientEntity.setLastName(updatePatientDetailRequest.getLastName());
         patientEntity.setEmail(updatePatientDetailRequest.getEmail());
         patientEntity.setDateOfBirth(updatePatientDetailRequest.getDateOfBirth());
-        patientEntity.setStatus(updatePatientDetailRequest.getStaus());
+        patientEntity.setStatus(updatePatientDetailRequest.getStatus());
         PatientEntity updatedPatient = this.patientRepository.save(patientEntity);
+        log.info("updatePatient() >>>>>>>");
         return  this.patientMapper.toResponseDto(updatedPatient);
     }
 
-    public List<PatientResponse> getPatientList(){
+    public List<PatientDto> getPatientList(){
         PatientEntity patientEntity = new PatientEntity();
         patientEntity.setStatus(StatusEnum.ACTIVE);
 
         Example<PatientEntity> productEntityExample = Example.of(patientEntity);
 
-        List<PatientEntity> patientEntities = this.patientRepository.findAll(productEntityExample);
-       return this.patientMapper.toDtoList(patientEntities);
+        //List<PatientEntity> patientEntities = this.patientRepository.findAll(productEntityExample);
+       // List<PatientEntity> allPatient = this.patientRepository.getAllPatient();
+        //return this.patientMapper.toDtoList(allPatient);
+        return this.patientRepository.getAllPatient();
     }
 
 
@@ -84,7 +95,7 @@ public class PatientService {
     }
 
     private PatientEntity getPatientEntity(Integer id) {
-        PatientEntity dbPatient = this.patientRepository.findById(id).orElseThrow(() -> new CustomException("Patient is not available for this id"));
+        PatientEntity dbPatient = this.patientRepository.getPatientEntityById(id).orElseThrow(() -> new CustomException("Patient is not available for this id"));
         return dbPatient;
     }
 }

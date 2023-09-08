@@ -75,6 +75,13 @@ public class DefaultAuthService implements AuthService {
         return false;
     }
 
+    private void resetLock(UserEntity userEntity) {
+        userEntity.setLocked(false);
+        userEntity.setLockTime(null);
+        userEntity.setFailedAttempt(0);
+        userEntity.setFailedAttemptWindowTime(null);
+    }
+
     private void checkFailedAttemptExceed(UserEntity userEntity) {
         if(userEntity.getFailedAttempt()==3){
             userEntity.setLocked(true);
@@ -82,13 +89,6 @@ public class DefaultAuthService implements AuthService {
             this.userRepsitory.save(userEntity);
             throw new AccountLockedException("Your account is locked, please try after 1 minutes");
         }
-    }
-
-    private void resetLock(UserEntity userEntity) {
-        userEntity.setLocked(false);
-        userEntity.setLockTime(null);
-        userEntity.setFailedAttempt(0);
-        userEntity.setFailedAttemptWindowTime(null);
     }
 
     private boolean isLockTimeExpired(UserEntity user) {

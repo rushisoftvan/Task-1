@@ -43,7 +43,7 @@ public class PatientEntity {
     @Column(name = "UPDATED_DATE_TIME")
     private LocalDateTime updatedDateTime;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne( fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name="PATIENT_INFO_ID")
     private PatientInfoEntity patientInfoEntity;
 

@@ -25,21 +25,5 @@ public class PatientInfoEntity {
     @Column(name="HAS_BLOOD_PRESSURE")
     private Boolean hasBloodPressure;
 
-    @Column(name = "CREATED_DATE_TIME")
-    private LocalDateTime createdDateTime;
-
-    @Column(name = "UPDATED_DATE_TIME")
-    private LocalDateTime updatedDateTime;
-
-    @PrePersist
-    public void beforePersist() {
-        this.createdDateTime = LocalDateTime.now();
-        this.updatedDateTime = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void beforeUpdate() {
-        this.updatedDateTime = LocalDateTime.now();
-    }
 
 }

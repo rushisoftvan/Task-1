@@ -17,6 +17,10 @@ public class PatientResponse {
 
     private String email;
 
+    private Boolean hasAllergy;
+
+    private Boolean hasBloodPressure;
+
     private LocalDate dateOfBirth;
 
     private LocalDateTime CreatedOn;

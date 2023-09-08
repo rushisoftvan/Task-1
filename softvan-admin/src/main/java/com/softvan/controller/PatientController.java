@@ -1,5 +1,6 @@
 package com.softvan.controller;
 
+import com.softvan.dto.PatientDto;
 import com.softvan.dto.request.PatientAddRequest;
 import com.softvan.dto.request.UpdatePatientDetailRequest;
 import com.softvan.dto.response.ApiResponse;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -39,14 +39,14 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse updatePatient( @PathVariable("id") @Positive(message ="PatientId should  be greater then zero") Integer patientId, @RequestBody   @Valid UpdatePatientDetailRequest updatePatientDetailRequest){
-        PatientResponse patientResponse = this.patientService.updatePatientDetails(patientId, updatePatientDetailRequest);
+    public ApiResponse updatePatient( @PathVariable("id")  Integer patientId, @RequestBody   @Valid UpdatePatientDetailRequest updatePatientDetailRequest){
+        PatientResponse patientResponse = this.patientService.updatePatient(patientId, updatePatientDetailRequest);
         return new ApiResponse(patientResponse,HttpStatus.OK.value());
     }
 
     @GetMapping
     public ApiResponse getAllPatient(){
-        List<PatientResponse> patientList = this.patientService.getPatientList();
+        List<PatientDto> patientList = this.patientService.getPatientList();
         return new ApiResponse(patientList,HttpStatus.OK.value());
     }
 }
