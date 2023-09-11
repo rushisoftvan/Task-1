@@ -53,7 +53,7 @@ public class UserService
       }
      UserEntity user = new UserEntity();
       user.setEmail(userRegisterRequest.getEmail());
-      user.setFirstName(userRegisterRequest.getFirstname());
+      user.setFirstName(userRegisterRequest.getFirstName());
       user.setLastName(userRegisterRequest.getLastName());
       user.setPassword(passwordEncoder.encode(userRegisterRequest.getPassword()));
       user.setRole(roleEntity);

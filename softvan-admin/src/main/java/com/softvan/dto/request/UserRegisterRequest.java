@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 public class UserRegisterRequest {
 
    @NotEmpty(message="first name should not be empty")
-    private String firstname;
+    private String firstName;
 
    @NotEmpty(message = "lastName should not be empty")
     private String lastName;

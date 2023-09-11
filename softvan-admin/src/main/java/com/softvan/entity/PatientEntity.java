@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="Patient")
+@Table(name="patient")
 @Getter
 @Setter
 public class PatientEntity {
@@ -43,7 +43,7 @@ public class PatientEntity {
     @Column(name = "UPDATED_DATE_TIME")
     private LocalDateTime updatedDateTime;
 
-    @OneToOne( fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @OneToOne( fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
     @JoinColumn(name="PATIENT_INFO_ID")
     private PatientInfoEntity patientInfoEntity;
 

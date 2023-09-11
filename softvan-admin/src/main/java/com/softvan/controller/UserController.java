@@ -17,12 +17,12 @@ import javax.validation.Valid;
 @Slf4j
 public class UserController {
 
-     private final UserService userService;
+    private final UserService userService;
 
     @PostMapping("/register")
-    public ApiResponse registerUser(@Valid @RequestBody UserRegisterRequest userRegisterRequest){
+    public ApiResponse registerUser(@Valid @RequestBody UserRegisterRequest userRegisterRequest) {
         String registerdUserName = this.userService.registerUser(userRegisterRequest);
-        return new ApiResponse(registerdUserName,HttpStatus.CREATED.value());
+        return new ApiResponse(registerdUserName, HttpStatus.CREATED.value());
     }
 
 

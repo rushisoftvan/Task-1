@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name="patietinfo")
+@Table(name = "patiet_info")
 public class PatientInfoEntity {
 
     @Id
@@ -19,10 +19,10 @@ public class PatientInfoEntity {
     @Column(name = "ID", updatable = false, nullable = false)
     private Integer id;
 
-    @Column(name= "HAS_ALLERGY")
+    @Column(name = "HAS_ALLERGY")
     private Boolean hasAllergy;
 
-    @Column(name="HAS_BLOOD_PRESSURE")
+    @Column(name = "HAS_BLOOD_PRESSURE")
     private Boolean hasBloodPressure;
 
 

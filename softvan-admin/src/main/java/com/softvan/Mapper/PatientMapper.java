@@ -43,8 +43,6 @@ public class PatientMapper {
          PatientInfoEntity patientInfoEntity = patientEntity.getPatientInfoEntity();
          patientResponse.setHasBloodPressure(patientInfoEntity.getHasBloodPressure());
          patientResponse.setHasAllergy(patientInfoEntity.getHasAllergy());
-         // patientResponse.setHasAllergy(patientEntity.getPatientInfoEntity().getHasAllergy());
-        // patientResponse.setHasBloodPressure(patientEntity.getPatientInfoEntity().getHasBloodPressure());
          log.info("toResponseDto() >>>>>>>>");
          return  patientResponse;
      }

@@ -7,36 +7,35 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
-public class PatientDto {
-    private String firstName;
+public final class PatientDto {
+    private final String firstName;
 
-    private String lastName;
+    private final String lastName;
 
-    private String email;
+    private final String email;
 
-    private Boolean hasAllergy;
+    private final Boolean hasAllergy;
 
 
+    private final Boolean hasBloodPressure;
 
-    private Boolean hasBloodPressure;
+    private final LocalDate dateOfBirth;
 
-    private LocalDate dateOfBirth;
+    private final LocalDateTime createdOn;
 
-    private LocalDateTime createdOn;
+    private final LocalDateTime updatedOn;
 
-    private LocalDateTime updatedOn;
+    private final StatusEnum statusEnum;
 
-    private StatusEnum statusEnum;
-
-    public PatientDto(String firstName,String lastName,String email,LocalDate dateOfBirth,LocalDateTime createdOn,LocalDateTime updatedOn,StatusEnum statusEnum,Boolean hasAllergy, Boolean hasBloodPressure) {
-     this.firstName=firstName;
-     this.lastName=lastName;
-     this.email=email;
-     this.hasAllergy=hasAllergy;
-     this.dateOfBirth=dateOfBirth;
-     this.createdOn=createdOn;
-     this.updatedOn=updatedOn;
-     this.statusEnum=statusEnum;
-     this.hasBloodPressure=hasBloodPressure;
+    public PatientDto(String firstName, String lastName, String email, LocalDate dateOfBirth, LocalDateTime createdOn, LocalDateTime updatedOn, StatusEnum statusEnum, Boolean hasAllergy, Boolean hasBloodPressure) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hasAllergy = hasAllergy;
+        this.dateOfBirth = dateOfBirth;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
+        this.statusEnum = statusEnum;
+        this.hasBloodPressure = hasBloodPressure;
     }
 }
