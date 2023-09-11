@@ -1,20 +1,17 @@
 package com.softvan.Mapper;
 
-import com.softvan.dto.request.PatientAddRequest;
+import com.softvan.dto.request.PatientCreateRequest;
 import com.softvan.dto.response.PatientResponse;
 import com.softvan.entity.PatientEntity;
 import com.softvan.entity.PatientInfoEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @Component
 public class PatientMapper {
 
-    public PatientEntity toEntity(PatientAddRequest patientAddRequest){
+    public PatientEntity toEntity(PatientCreateRequest patientAddRequest){
         log.info("<<<<<<<<< toEntity() ");
         PatientEntity patientEntity = new PatientEntity();
 
@@ -51,15 +48,15 @@ public class PatientMapper {
          log.info("toResponseDto() >>>>>>>>");
          return  patientResponse;
      }
-    public List<PatientResponse> toDtoList(List<PatientEntity> patientEntities){
-        List<PatientResponse> patientList = new ArrayList<>();
+//    public List<PatientResponse> toDtoList(List<PatientEntity> patientEntities){
+//        List<PatientResponse> patientList = new ArrayList<>();
+//
+//        for(PatientEntity patientEntity : patientEntities){
+//            PatientResponse patientResponse = toResponseDto(patientEntity);
+//            patientList.add(patientResponse);
+//        }
+//        return patientList;
 
-        for(PatientEntity patientEntity : patientEntities){
-            PatientResponse patientResponse = toResponseDto(patientEntity);
-            patientList.add(patientResponse);
-        }
-        return patientList;
-    }
 
 
 }

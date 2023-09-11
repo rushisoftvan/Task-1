@@ -1,7 +1,7 @@
 package com.softvan.controller;
 
 import com.softvan.dto.PatientDto;
-import com.softvan.dto.request.PatientAddRequest;
+import com.softvan.dto.request.PatientCreateRequest;
 import com.softvan.dto.request.UpdatePatientDetailRequest;
 import com.softvan.dto.response.ApiResponse;
 import com.softvan.dto.response.PatientResponse;
@@ -14,14 +14,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pationts")
+@RequestMapping("/patients")
 @RequiredArgsConstructor
 public class PatientController {
 
     private final PatientService patientService;
     
     @PostMapping
-    public ApiResponse addPatient( @RequestBody @Valid  PatientAddRequest patientAddRequest){
+    public ApiResponse addPatient( @RequestBody @Valid PatientCreateRequest patientAddRequest){
         PatientResponse patientResponse = this.patientService.savePatientDetails(patientAddRequest);
         return  new ApiResponse(patientResponse, HttpStatus.CREATED.value());
     }

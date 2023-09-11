@@ -2,7 +2,7 @@ package com.softvan.service;
 
 import com.softvan.Mapper.PatientMapper;
 import com.softvan.dto.PatientDto;
-import com.softvan.dto.request.PatientAddRequest;
+import com.softvan.dto.request.PatientCreateRequest;
 import com.softvan.dto.request.UpdatePatientDetailRequest;
 import com.softvan.dto.response.PatientResponse;
 import com.softvan.entity.PatientEntity;
@@ -26,7 +26,7 @@ public class PatientService {
 
     private final PatientRepository patientRepository;
 
-    public PatientResponse savePatientDetails(PatientAddRequest patientAddRequest){
+    public PatientResponse savePatientDetails(PatientCreateRequest patientAddRequest){
 
         log.info("<<<<<<<<< savePatientDetails()");
         checkAddPatientRequsteNull(patientAddRequest);
@@ -87,7 +87,7 @@ public class PatientService {
     }
 
 
-    private static void checkAddPatientRequsteNull(PatientAddRequest patientAddRequest) {
+    private static void checkAddPatientRequsteNull(PatientCreateRequest patientAddRequest) {
         if(patientAddRequest ==null)
         {
             throw new CustomException("patientAddRequest should not be null");

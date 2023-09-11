@@ -47,6 +47,7 @@ public class UserService
      RoleEntity roleEntity = this.roleRepository.findById(userRegisterRequest.getRoleId()).orElseThrow(() -> new RoleNotFoundException("Role is not available for this id"));
 
      Optional<UserEntity> userByUsername = this.userRepsitory.getUserByUsername(userRegisterRequest.getEmail());
+
       if(userByUsername.isPresent()){
           throw new UserAlreadyExistsException("User already  exists");
       }
