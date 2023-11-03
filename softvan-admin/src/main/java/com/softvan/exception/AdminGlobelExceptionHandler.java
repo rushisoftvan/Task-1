@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestControllerAdvice
 @Slf4j
@@ -28,13 +29,13 @@ public class AdminGlobelExceptionHandler {
             finalErrors.add(message);
         }
         log.error(EXCEPTION_MESSAGE , ex);
-        return new ApiResponse(finalErrors, HttpStatus.BAD_REQUEST.value());
+        return ApiResponse.from(Optional.of(finalErrors), HttpStatus.BAD_REQUEST.value());
     }
 
     @ExceptionHandler(CustomException.class)
     public ApiResponse handleCustomeException(CustomException customException){
         String errorMessae = customException.getMessage();
-       return new ApiResponse(Arrays.asList(errorMessae),HttpStatus.INTERNAL_SERVER_ERROR.value());
+       return ApiResponse.from(Optional.of(Arrays.asList(errorMessae)),HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
 

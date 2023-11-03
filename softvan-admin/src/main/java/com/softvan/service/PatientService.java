@@ -50,6 +50,7 @@ public class PatientService {
 
 
 
+   @Transactional
     public String deletePatientById(Integer id){
         log.info("<<<<<<<<< deletePatientById()");
         PatientEntity patientEntity = getPatientEntity(id);
@@ -60,7 +61,7 @@ public class PatientService {
 
     }
 
-
+    @Transactional
     public PatientResponse updatePatient(Integer id, UpdatePatientDetailRequest updatePatientDetailRequest){
         log.info("<<<<<<<<< updatePatient()");
         if(updatePatientDetailRequest ==null){
@@ -94,13 +95,14 @@ public class PatientService {
         //return this.patientMapper.toDtoList(allPatient);
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
+        int pageNumber = pageable.getPageNumber();
         log.info("getPatientList()  >>>>>>>");
         Page<PatientDto> patientPage = this.patientRepository.getAllPatient(pageable);
-        return preparePatientPagedResponse(patientPage);
+        return preparePatientPagedResponse(patientPage,pageNo);
 
     }
 
-    private static PatientPagedResponse preparePatientPagedResponse(Page<PatientDto> patientPage) {
+    private static PatientPagedResponse preparePatientPagedResponse(Page<PatientDto> patientPage,int pageNo) {
         List<PatientDto> patientList = patientPage.getContent();
         PatientPagedResponse patientPagedResponse = new PatientPagedResponse();
         patientPagedResponse.setPatientlist(patientList);
@@ -109,6 +111,9 @@ public class PatientService {
         patientPagedResponse.setLastPage(patientPage.isLast());
         patientPagedResponse.setHasPrevious(patientPage.hasPrevious());
         patientPagedResponse.setHasNext(patientPage.hasNext());
+        patientPagedResponse.setTotalPage(patientPage.getTotalPages());
+        patientPagedResponse.setPageNo(pageNo);
+
        return  patientPagedResponse;
     }
 
@@ -124,4 +129,11 @@ public class PatientService {
         PatientEntity dbPatient = this.patientRepository.fetchPatientWithPatientInfoEntityById(id).orElseThrow(() -> new CustomException("Patient is not available for this id"));
         return dbPatient;
     }
+
+    public List<PatientDto> fetchAllPatient(){
+
+        return  this.patientRepository.fetchAllPatient();
+    }
+
+
 }

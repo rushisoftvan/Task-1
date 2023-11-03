@@ -1,16 +1,38 @@
 package com.softvan.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AccessLevel;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Getter
-public final class ApiResponse<T> {
 
-    private final T data;
-    private  final Integer code;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public  class ApiResponse<T> {
 
-    public ApiResponse(T data, Integer code) {
-        this.data = data;
-        this.code = code;
+    private  T data;
+    private   Integer code;
+    private  List<String> errors;
+
+
+    public ApiResponse(){
+
     }
+
+    public ApiResponse(T data , Integer code) {
+        this.data=data;
+        this.code=code;
+    }
+
+
+    public static ApiResponse from(Object data, Integer code){
+        return new ApiResponse(data,code);
+    }
+
+    public static ApiResponse from(List<String> errors, Integer code){
+        return new ApiResponse(errors,code);
+    }
+
 }

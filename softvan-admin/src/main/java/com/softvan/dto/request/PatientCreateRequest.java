@@ -31,4 +31,9 @@ public class PatientCreateRequest {
     @NotNull(message= "Date Of Birth Should not be null")
     private LocalDate dateOfBirth;
 
+    public static void main(String[] args) {
+        System.out.println(LocalDate.now());
+    }
+
+
 }

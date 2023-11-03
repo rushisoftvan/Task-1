@@ -22,5 +22,9 @@ public class PatientPagedResponse {
 
     private boolean hasNext;
 
+    private int totalPage;
+
+    private int pageNo;
+
 
 }

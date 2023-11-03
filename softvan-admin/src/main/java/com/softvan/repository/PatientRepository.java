@@ -6,19 +6,32 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 
+import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
-public interface PatientRepository  extends JpaRepository<PatientEntity,Integer> {
+@EnableJpaRepositories
+public interface PatientRepository  extends JpaRepository<PatientEntity,Integer>  {
+
+
 
     @Query("select p From PatientEntity p JOIN FETCH p.patientInfoEntity where p.id=:id")
     Optional<PatientEntity> fetchPatientWithPatientInfoEntityById(@Param("id") Integer id);
 
     //
-     @Query("select new com.softvan.dto.PatientDto(p.firstName,p.lastName,p.email,p.dateOfBirth,p.createdDateTime,p.updatedDateTime,p.status,p.patientInfoEntity.hasAllergy,p.patientInfoEntity.hasBloodPressure) from PatientEntity p join  p.patientInfoEntity  where p.status='ACTIVE'")
+     @Query("select new com.softvan.dto.PatientDto(p.id,p.firstName,p.lastName,p.email,p.dateOfBirth,p.createdDateTime,p.updatedDateTime,p.status,p.patientInfoEntity.hasAllergy,p.patientInfoEntity.hasBloodPressure) from PatientEntity p join  p.patientInfoEntity  where p.status='ACTIVE'")
      Page<PatientDto> getAllPatient(Pageable pageable);
-   // @Query(" select p From PatientEntity p JOIN FETCH p.patientInfoEntity where p.status='ACTIVE'")
-    //List<PatientEntity> getAllPatient();// taking objects and putting them outside of the JPA context
+
+
+
+
+    @Query("select new com.softvan.dto.PatientDto(p.id,p.firstName,p.lastName,p.email,p.dateOfBirth,p.createdDateTime,p.updatedDateTime,p.status,p.patientInfoEntity.hasAllergy,p.patientInfoEntity.hasBloodPressure) from PatientEntity p join  p.patientInfoEntity  where p.status='ACTIVE'")
+    List<PatientDto> fetchAllPatient();// taking objects and putting them outside of the JPA context
+
+
+
 
 }

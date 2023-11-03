@@ -3,6 +3,7 @@ package com.softvan.entity;
 import com.softvan.enums.StatusEnum;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.persistence.*;
@@ -19,6 +20,21 @@ public class PatientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
     private Integer id;
+
+    @Override
+    public String toString() {
+        return "PatientEntity{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", status=" + status +
+                ", createdDateTime=" + createdDateTime +
+                ", updatedDateTime=" + updatedDateTime +
+                ", patientInfoEntity=" + patientInfoEntity +
+                '}';
+    }
 
     @Column(name="First_NAME")
     private String firstName;
