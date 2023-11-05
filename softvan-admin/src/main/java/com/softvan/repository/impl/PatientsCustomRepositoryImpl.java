@@ -65,6 +65,7 @@ public class PatientsCustomRepositoryImpl implements PatientsCustomRepository {
         }
 
         // Calculate and set LIMIT AND OFFSET
+        // Pagination logic
         /*  Page size = 5
             Page 1 -> 0 -> (1-1) * 5 = 0
             Page 2 -> 5 -> (2-1) * 5 = 5
