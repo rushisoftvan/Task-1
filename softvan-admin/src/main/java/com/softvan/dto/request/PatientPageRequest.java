@@ -2,29 +2,19 @@ package com.softvan.dto.request;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.Objects;
 
-@Getter
-@Setter
+public record PatientPageRequest(@Positive(message = "page number should be greater then zero") Integer pageNumber,
+                                 @Positive(message = "page size should be greater then zero") Integer pageSize,
+                                 String searchText, Boolean hasBloodPressure, Boolean hasEnergy) {
 
-public class PatientPageRequest {
-
-    @NotNull(message = "pageNumber should not be null")
-    @Positive(message = "page number should be greter then zero")
-    private Integer pageNumber = 1;
-
-    @NotNull(message = "pageSize should not be null")
-    @Positive(message = "page size should be greter then zero")
-    private Integer pageSize = 5;
-
-    private String firstName;
-
-    public PatientPageRequest(Integer pageNumber,Integer pageSize,String firstName){
-         this.pageNumber=pageNumber;
-         this.pageSize=pageSize;
-         this.firstName=firstName;
-    }
+        public PatientPageRequest(@Positive(message = "page number should be greater then zero") Integer pageNumber, @Positive(message = "page size should be greater then zero") Integer pageSize, String searchText, Boolean hasBloodPressure, Boolean hasEnergy) {
+                this.pageNumber = Objects.nonNull(pageNumber) ? pageNumber : 1;
+                this.pageSize = Objects.nonNull(pageSize) ? pageSize : 5;
+                this.searchText = searchText;
+                this.hasBloodPressure = hasBloodPressure;
+                this.hasEnergy = hasEnergy;
+        }
 }

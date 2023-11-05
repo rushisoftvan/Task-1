@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-@EnableJpaRepositories
-public interface PatientRepository  extends JpaRepository<PatientEntity,Integer>  {
+
+public interface PatientRepository  extends JpaRepository<PatientEntity,Integer>, PatientsCustomRepository  {
+
 
 
 

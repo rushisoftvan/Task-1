@@ -14,7 +14,7 @@
 	<name>softvan-resository</name>
 	<description>There is repository related </description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

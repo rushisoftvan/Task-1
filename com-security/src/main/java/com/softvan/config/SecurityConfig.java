@@ -31,9 +31,9 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
 
     public static String[] PUBLIC_URLS = {
-            "/login",
-            "/register",
-            "/patients/**"
+            "/auth/**"
+//            "/register"
+            //"/patients/**"
 
     };
 
@@ -48,6 +48,7 @@ public class SecurityConfig {
         http
                 .csrf()
                 .disable();
+        http.cors();
         http.authorizeRequests()
                 .antMatchers(PUBLIC_URLS).permitAll()
 //                .antMatchers("/m1").hasAuthority("ADMIN")

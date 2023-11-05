@@ -83,8 +83,8 @@ public class PatientService {
 
     public PatientPagedResponse getPatientList(PatientPageRequest patientPageRequest){
         log.info("<<<<<<<<< getPatientList()");
-        Integer pageNo=patientPageRequest.getPageNumber()-1;
-        Integer pageSize = patientPageRequest.getPageSize();
+        Integer pageNo=patientPageRequest.pageNumber()-1;
+        Integer pageSize = patientPageRequest.pageSize();
         PatientEntity patientEntity = new PatientEntity();
         patientEntity.setStatus(StatusEnum.ACTIVE);
 
@@ -131,8 +131,12 @@ public class PatientService {
     }
 
     public List<PatientDto> fetchAllPatient(){
-
         return  this.patientRepository.fetchAllPatient();
+    }
+
+    public Page<PatientDto> searchPatient(PatientPageRequest patientPageRequest){
+        Page<PatientDto> pagedPatientDto = this.patientRepository.search(patientPageRequest);
+        return pagedPatientDto;
     }
 
 

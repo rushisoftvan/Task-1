@@ -4,11 +4,13 @@ package com.softvan.Repository;
 import com.softvan.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@EnableJpaRepositories
 public interface UserRepsitory extends JpaRepository<UserEntity,Integer> {
 
 

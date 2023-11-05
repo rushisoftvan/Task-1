@@ -14,7 +14,7 @@
 	<name>softvan-entity</name>
 	<description>This project have entity related</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
