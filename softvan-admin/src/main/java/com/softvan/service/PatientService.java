@@ -113,7 +113,6 @@ public class PatientService {
         patientPagedResponse.setHasNext(patientPage.hasNext());
         patientPagedResponse.setTotalPage(patientPage.getTotalPages());
         patientPagedResponse.setPageNo(pageNo);
-
        return  patientPagedResponse;
     }
 
@@ -134,9 +133,10 @@ public class PatientService {
         return  this.patientRepository.fetchAllPatient();
     }
 
-    public Page<PatientDto> searchPatient(PatientPageRequest patientPageRequest){
+    public PatientPagedResponse searchPatient(PatientPageRequest patientPageRequest){
         Page<PatientDto> pagedPatientDto = this.patientRepository.search(patientPageRequest);
-        return pagedPatientDto;
+        //return pagedPatientDto;
+       return  preparePatientPagedResponse(pagedPatientDto,patientPageRequest.pageNumber());
     }
 
 

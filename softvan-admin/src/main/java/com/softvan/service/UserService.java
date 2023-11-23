@@ -22,8 +22,6 @@ import java.util.Optional;
 @Service
 public class UserService
 {
-
-
     private static final String PASSWORD_IS_NOT_CORRECT = "password is not correct";
     private final UserRepsitory userRepsitory;
        

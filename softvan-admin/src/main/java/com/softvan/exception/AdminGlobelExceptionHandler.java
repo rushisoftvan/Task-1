@@ -32,11 +32,12 @@ public class AdminGlobelExceptionHandler {
         return ApiResponse.from(Optional.of(finalErrors), HttpStatus.BAD_REQUEST.value());
     }
 
-    @ExceptionHandler(CustomException.class)
-    public ApiResponse handleCustomeException(CustomException customException){
+    @ExceptionHandler(UserNotFoundException.class)
+    public ApiResponse handleCustomeException(UserNotFoundException customException){
         String errorMessae = customException.getMessage();
        return ApiResponse.from(Optional.of(Arrays.asList(errorMessae)),HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
+
 
 
 

@@ -26,5 +26,4 @@ public class PatientPagedResponse {
 
     private int pageNo;
 
-
 }

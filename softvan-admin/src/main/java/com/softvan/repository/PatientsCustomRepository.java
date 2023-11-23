@@ -6,5 +6,5 @@ import org.springframework.data.domain.Page;
 
 
 public interface PatientsCustomRepository {
-    public Page<PatientDto> search(PatientPageRequest patientPageRequest);
+        public Page<PatientDto> search(PatientPageRequest patientPageRequest);
 }

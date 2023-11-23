@@ -2,6 +2,7 @@ package com.softvan;
 
 import com.softvan.dto.PatientDto;
 import com.softvan.dto.request.PatientPageRequest;
+import com.softvan.dto.response.PatientPagedResponse;
 import com.softvan.jwt.JwtProperties;
 import com.softvan.repository.PatientRepository;
 import com.softvan.repository.PatientsCustomRepository;
@@ -31,26 +32,28 @@ public class SoftvanAdminApplication  implements CommandLineRunner {
 	public static void main(String[] args) {
 
 		SpringApplication.run(SoftvanAdminApplication.class, args);
-		//System.out.println(LocalDate.now());
-	}
+
+		}
 
 	@Override
 	public void run(String... args) throws Exception {
 		PatientPageRequest pageRequest = new PatientPageRequest(null,2,"mal",null,null);
-		Page<PatientDto> pagedPatient = patientService.searchPatient(pageRequest);
+		PatientPagedResponse patientPagedResponse = patientService.searchPatient(pageRequest);
 		System.out.println("Firstname\t Lastname\t HasAllergy\n");
-		for (PatientDto patientDto : pagedPatient.getContent()) {
+		for (PatientDto patientDto : patientPagedResponse.getPatientlist()) {
+
+
 			System.out.printf("%s\t %s\t %s\n",
 					patientDto.getFirstName() ,
 					patientDto.getLastName(),
 					patientDto.getHasAllergy());
 		}
-		System.out.printf("Total page : %s\n", pagedPatient.getTotalPages());
-		System.out.printf("Total Records : %s\n", pagedPatient.getTotalElements());
-		System.out.printf("Has next : %s\n", pagedPatient.hasNext());
-		System.out.printf("Has Previous : %s\n", pagedPatient.hasPrevious());
-		System.out.printf("Is First : %s\n", pagedPatient.isFirst());
-		System.out.printf("Is Last : %s\n", pagedPatient.isLast());
+		System.out.printf("Total page : %s\n", patientPagedResponse.getTotalPage());
+		System.out.printf("Total Records : %s\n", patientPagedResponse.getTotalRecords());
+		System.out.printf("Has next : %s\n", patientPagedResponse.isHasNext());
+		System.out.printf("Has Previous : %s\n", patientPagedResponse.isHasNext());
+		System.out.printf("Is First : %s\n", patientPagedResponse.isFirstPage());
+		System.out.printf("Is Last : %s\n", patientPagedResponse.isLastPage());
 
 	}
 //	@Override

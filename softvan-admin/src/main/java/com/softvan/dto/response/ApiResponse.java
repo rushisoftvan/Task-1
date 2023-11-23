@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @Getter
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public  class ApiResponse<T> {
 
@@ -23,6 +22,10 @@ public  class ApiResponse<T> {
 
     public ApiResponse(T data , Integer code) {
         this.data=data;
+        this.code=code;
+    }
+    public ApiResponse(List<String>errors,Integer code){
+        this.errors = errors;
         this.code=code;
     }
 

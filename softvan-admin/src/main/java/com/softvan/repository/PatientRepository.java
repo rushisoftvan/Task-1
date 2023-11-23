@@ -15,25 +15,19 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface PatientRepository  extends JpaRepository<PatientEntity,Integer>, PatientsCustomRepository  {
-
-
+public interface PatientRepository extends JpaRepository<PatientEntity, Integer>, PatientsCustomRepository {
 
 
     @Query("select p From PatientEntity p JOIN FETCH p.patientInfoEntity where p.id=:id")
     Optional<PatientEntity> fetchPatientWithPatientInfoEntityById(@Param("id") Integer id);
 
     //
-     @Query("select new com.softvan.dto.PatientDto(p.id,p.firstName,p.lastName,p.email,p.dateOfBirth,p.createdDateTime,p.updatedDateTime,p.status,p.patientInfoEntity.hasAllergy,p.patientInfoEntity.hasBloodPressure) from PatientEntity p join  p.patientInfoEntity  where p.status='ACTIVE'")
-     Page<PatientDto> getAllPatient(Pageable pageable);
-
-
+    @Query("select new com.softvan.dto.PatientDto(p.id,p.firstName,p.lastName,p.email,p.dateOfBirth,p.createdDateTime,p.updatedDateTime,p.status,p.patientInfoEntity.hasAllergy,p.patientInfoEntity.hasBloodPressure) from PatientEntity p join  p.patientInfoEntity  where p.status='ACTIVE'")
+    Page<PatientDto> getAllPatient(Pageable pageable);
 
 
     @Query("select new com.softvan.dto.PatientDto(p.id,p.firstName,p.lastName,p.email,p.dateOfBirth,p.createdDateTime,p.updatedDateTime,p.status,p.patientInfoEntity.hasAllergy,p.patientInfoEntity.hasBloodPressure) from PatientEntity p join  p.patientInfoEntity  where p.status='ACTIVE'")
     List<PatientDto> fetchAllPatient();// taking objects and putting them outside of the JPA context
-
-
 
 
 }

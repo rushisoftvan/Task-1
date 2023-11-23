@@ -33,13 +33,18 @@ public class PatientsCustomRepositoryImpl implements PatientsCustomRepository {
                 @projection
                 FROM PatientEntity p
                 JOIN p.patientInfoEntity pi
-                WHERE 1=1
+                WHERE p.status='ACTIVE'
                 """);
 
         if (nonNull(patientPageRequest.searchText())){
                 commonJpqlBuider.append(" AND CONCAT(p.firstName,' ', p.lastName) LIKE :searchText");
                 whereClause.put("searchText", "%" + patientPageRequest.searchText() + "%");
         }
+
+        String orderByCreaedDate = """
+                                      ORDER BY  p.createdDateTime DESC
+                                    """;
+        commonJpqlBuider.append(orderByCreaedDate);
 
         String projection = """
                 new com.softvan.dto.PatientDto
